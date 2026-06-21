@@ -1,0 +1,113 @@
+{
+  "info": {
+    "name": "Instagram Auto Poster API",
+    "_postman_id": "ig-auto-poster-collection",
+    "description": "Every endpoint from src/constants/api.ts. See src/contracts/API_CONTRACT.md.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "postId", "value": "p_1" },
+    { "key": "cronSecret", "value": "replace-me" }
+  ],
+  "item": [
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET /api/dashboard",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/dashboard" }
+        },
+        {
+          "name": "GET /api/dashboard/charts",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/dashboard/charts" }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "GET /api/posts/pending",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/posts/pending" }
+        },
+        {
+          "name": "GET /api/posts/history",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/posts/history" }
+        },
+        {
+          "name": "GET /api/posts/:id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/posts/{{postId}}" }
+        },
+        {
+          "name": "POST /api/posts/upload",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/posts/upload",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "files", "type": "file", "src": [] },
+                { "key": "posts", "type": "text", "value": "[{\"title\":\"Demo\",\"caption\":\"Hello #world\",\"type\":\"image\"}]" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /api/posts/:id",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/posts/{{postId}}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated title\",\n  \"caption\": \"Updated caption #tag\"\n}" }
+          }
+        },
+        {
+          "name": "DELETE /api/posts/:id",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/posts/{{postId}}" }
+        },
+        {
+          "name": "POST /api/posts/post-now",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/posts/post-now",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"id\": \"{{postId}}\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "GET /api/settings",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/settings" }
+        },
+        {
+          "name": "PUT /api/settings",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/settings",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"dailyTime\": \"10:00\",\n  \"timezone\": \"Asia/Karachi\",\n  \"queueMethod\": \"FIFO\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cron",
+      "item": [
+        {
+          "name": "POST /api/cron/run",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/cron/run",
+            "header": [{ "key": "x-cron-secret", "value": "{{cronSecret}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}
