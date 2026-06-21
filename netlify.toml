@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = ".output/public" # TanStack Start डिफ़ॉल्ट रूप से यहाँ बिल्ड करता है
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
