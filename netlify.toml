@@ -1,8 +1,0 @@
-[build]
-  command = "npm run build"
-  publish = "dist" # या जो भी आपका बिल्ड आउटपुट फोल्डर है
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
