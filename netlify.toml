@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = ".output/public" # TanStack Start डिफ़ॉल्ट रूप से यहाँ बिल्ड करता है
+  publish = "dist" # या जो भी आपका बिल्ड आउटपुट फोल्डर है
 
 [[redirects]]
   from = "/*"
